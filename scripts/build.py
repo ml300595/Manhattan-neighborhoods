@@ -50,6 +50,9 @@ def build_polygons(base):
             parent = base[src["clip_from"]]
             rect = box(*src["bbox"])
             geom = parent.intersection(rect)
+            # Optional: punch holes so this clip doesn't overlap prior clips
+            if "subtract" in src:
+                geom = geom.difference(unary_union([box(*b) for b in src["subtract"]]))
             clips_by_parent.setdefault(src["clip_from"], []).append(rect)
             if "and_clip_from" in src:
                 parent2 = base[src["and_clip_from"]]

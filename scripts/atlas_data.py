@@ -109,100 +109,115 @@ NEIGHBORHOODS = [
      "one_liner": "Park-like superblock; very safe; residential but uniform.",
      "source": {"base": "Stuyvesant Town"}},
 
-    {"rank": 20, "name": "Meatpacking District", "tier": 3, "centroid": (40.740, -74.008),
+    {"rank": 20, "name": "Turtle Bay", "tier": 3, "centroid": (40.753, -73.968),
+     "one_liner": "Residential townhouse streets behind the UN; safe and quieter than its postcode suggests.",
+     "source": {"clip_from": "Midtown",
+                "bbox": [-73.975, 40.748, -73.958, 40.757]}},
+
+    {"rank": 21, "name": "Meatpacking District", "tier": 3, "centroid": (40.740, -74.008),
      "one_liner": "Beautiful cobblestone; nightlife-driven; weak on quiet.",
      "source": {"clip_from": "West Village",
                 "bbox": [-74.012, 40.7390, -74.0030, 40.7430]}},
 
     # ---------- Tier 4 ----------
-    {"rank": 21, "name": "SoHo", "tier": 4, "centroid": (40.724, -74.001),
+    {"rank": 22, "name": "SoHo", "tier": 4, "centroid": (40.724, -74.001),
      "one_liner": "Beautiful but tourist-saturated; weak on quiet.",
      "source": {"base": "SoHo", "remainder_of": True}},
 
-    {"rank": 22, "name": "Hell's Kitchen", "tier": 4, "centroid": (40.764, -73.991),
+    {"rank": 23, "name": "Hell's Kitchen", "tier": 4, "centroid": (40.764, -73.991),
      "one_liner": "Improving, charming pockets; uneven on quiet/beauty.",
      "source": {"base": "Hell's Kitchen", "remainder_of": True}},
 
-    {"rank": 23, "name": "Morningside Heights", "tier": 4, "centroid": (40.808, -73.961),
+    {"rank": 24, "name": "Morningside Heights", "tier": 4, "centroid": (40.808, -73.961),
      "one_liner": "Columbia-anchored, leafy, generally safe.",
      "source": {"base": "Morningside Heights", "remainder_of": True}},
 
-    {"rank": 24, "name": "Financial District", "tier": 4, "centroid": (40.708, -74.011),
+    {"rank": 25, "name": "Financial District", "tier": 4, "centroid": (40.708, -74.011),
      "one_liner": "Safe, striking architecture; dead on weekends.",
      "source": {"base": "Financial District"}},
 
-    {"rank": 25, "name": "East Village", "tier": 4, "centroid": (40.726, -73.984),
+    {"rank": 26, "name": "East Village", "tier": 4, "centroid": (40.726, -73.984),
      "one_liner": "Charming but loud; uneven safety.",
      "source": {"base": "East Village"}},
 
-    {"rank": 26, "name": "Lower East Side", "tier": 4, "centroid": (40.717, -73.987),
+    {"rank": 27, "name": "Lower East Side", "tier": 4, "centroid": (40.717, -73.987),
      "one_liner": "Vibrant, noisy, uneven block-by-block.",
      "source": {"base": "Lower East Side"}},
 
-    {"rank": 27, "name": "Midtown (core)", "tier": 4, "centroid": (40.755, -73.984),
+    # Midtown split into 3 zones ─────────────────────────────────────────────
+    {"rank": 28, "name": "Midtown East", "tier": 4, "centroid": (40.754, -73.975),
+     "one_liner": "Park-to-Lex office corridor; safe but primarily transactional.",
+     "source": {"clip_from": "Midtown",
+                "bbox": [-73.985, 40.741, -73.958, 40.770],
+                # punch out Turtle Bay and Sutton/Beekman so polygons don't overlap
+                "subtract": [[-73.975, 40.748, -73.958, 40.757],   # Turtle Bay
+                             [-73.965, 40.751, -73.958, 40.762]]}}, # Sutton/Beekman
+
+    {"rank": 29, "name": "Midtown (core)", "tier": 4, "centroid": (40.757, -73.988),
      "one_liner": "Office-heavy; not residential in feel.",
      "source": {"base": "Midtown", "remainder_of": True}},
+    # ─────────────────────────────────────────────────────────────────────────
 
-    {"rank": 28, "name": "Theater District", "tier": 4, "centroid": (40.759, -73.984),
+    {"rank": 30, "name": "Theater District", "tier": 4, "centroid": (40.759, -73.984),
      "one_liner": "Tourist energy; transit hub; weak on residential.",
      "source": {"base": "Theater District"}},
 
-    {"rank": 29, "name": "Hudson Square", "tier": 4, "centroid": (40.726, -74.008),
+    {"rank": 31, "name": "Hudson Square", "tier": 4, "centroid": (40.726, -74.008),
      "one_liner": "Transitional; mostly commercial.",
      "source": {"clip_from": "SoHo",
                 "bbox": [-74.016, 40.718, -74.0040, 40.730]}},
 
-    {"rank": 30, "name": "Nolita", "tier": 4, "centroid": (40.722, -73.995),
+    {"rank": 32, "name": "Nolita", "tier": 4, "centroid": (40.722, -73.995),
      "one_liner": "Charming but tiny and busy.",
      "source": {"merge": ["Nolita", "Little Italy"]}},
 
-    {"rank": 31, "name": "Civic Center", "tier": 4, "centroid": (40.713, -74.005),
+    {"rank": 33, "name": "Civic Center", "tier": 4, "centroid": (40.713, -74.005),
      "one_liner": "Government buildings; not residential.",
      "source": {"base": "Civic Center"}},
 
     # ---------- Tier 5 ----------
-    {"rank": 32, "name": "Hudson Yards", "tier": 5, "centroid": (40.754, -74.001),
+    {"rank": 34, "name": "Hudson Yards", "tier": 5, "centroid": (40.754, -74.001),
      "one_liner": "Modern, sterile; not residential in any traditional sense.",
      "source": {"clip_from": "Chelsea",
                 "bbox": [-74.012, 40.748, -73.997, 40.760],
                 "and_clip_from": "Hell's Kitchen",
                 "bbox2": [-74.012, 40.752, -73.997, 40.760]}},
 
-    {"rank": 33, "name": "Inwood", "tier": 5, "centroid": (40.867, -73.921),
+    {"rank": 35, "name": "Inwood", "tier": 5, "centroid": (40.867, -73.921),
      "one_liner": "Quiet; has Fort Tryon Park; isolated, architecturally modest.",
      "source": {"base": "Inwood"}},
 
-    {"rank": 34, "name": "Washington Heights", "tier": 5, "centroid": (40.840, -73.939),
+    {"rank": 36, "name": "Washington Heights", "tier": 5, "centroid": (40.840, -73.939),
      "one_liner": "Some beautiful blocks (Hudson Heights); uneven safety.",
      "source": {"base": "Washington Heights"}},
 
-    {"rank": 35, "name": "Hamilton Heights", "tier": 5, "centroid": (40.825, -73.948),
+    {"rank": 37, "name": "Hamilton Heights", "tier": 5, "centroid": (40.825, -73.948),
      "one_liner": "Beautiful brownstones, improving; safety still variable.",
      "source": {"clip_from": "Harlem",
                 "bbox": [-73.962, 40.820, -73.945, 40.835]}},
 
-    {"rank": 36, "name": "Manhattanville", "tier": 5, "centroid": (40.819, -73.957),
+    {"rank": 38, "name": "Manhattanville", "tier": 5, "centroid": (40.819, -73.957),
      "one_liner": "Industrial-residential mix, still transitional.",
      "source": {"clip_from": "Morningside Heights",
                 "bbox": [-73.965, 40.814, -73.954, 40.819]}},
 
-    {"rank": 37, "name": "Central Harlem", "tier": 5, "centroid": (40.808, -73.945),
+    {"rank": 39, "name": "Central Harlem", "tier": 5, "centroid": (40.808, -73.945),
      "one_liner": "Cultural depth, gorgeous brownstones; safety varies.",
      "source": {"base": "Harlem", "remainder_of": True}},
 
-    {"rank": 38, "name": "East Harlem", "tier": 5, "centroid": (40.795, -73.938),
+    {"rank": 40, "name": "East Harlem", "tier": 5, "centroid": (40.795, -73.938),
      "one_liner": "Improving but the weakest on safety among Manhattan options.",
      "source": {"base": "East Harlem"}},
 
-    {"rank": 39, "name": "Chinatown", "tier": 5, "centroid": (40.715, -73.997),
+    {"rank": 41, "name": "Chinatown", "tier": 5, "centroid": (40.715, -73.997),
      "one_liner": "Vibrant but neither quiet nor classically residential.",
      "source": {"base": "Chinatown"}},
 
-    {"rank": 40, "name": "Two Bridges", "tier": 5, "centroid": (40.711, -73.993),
+    {"rank": 42, "name": "Two Bridges", "tier": 5, "centroid": (40.711, -73.993),
      "one_liner": "Mixed, transitional, limited residential character.",
      "source": {"base": "Two Bridges"}},
 
-    {"rank": 41, "name": "Marble Hill", "tier": 5, "centroid": (40.876, -73.911),
+    {"rank": 43, "name": "Marble Hill", "tier": 5, "centroid": (40.876, -73.911),
      "one_liner": "Technically Manhattan but isolated on the Bronx mainland.",
      "source": {"base": "Marble Hill"}},
 ]
