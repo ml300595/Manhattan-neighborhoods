@@ -271,7 +271,7 @@ BROOKLYN = [
             "Quietest blocks are on Washington Ave east of Grand Army Plaza."
         ),
         "watch_outs": "Vanderbilt Ave loud on Friday/Saturday nights; some blocks near the 4 train are noisy.",
-        "source": {"clip_from": "Park Slope", "bbox": [-73.975, 40.668, -73.956, 40.682]},
+        "source": {"base": "Prospect Heights"},
     },
 
     {
@@ -294,7 +294,7 @@ BROOKLYN = [
             "Good value relative to North Slope."
         ),
         "watch_outs": "5th Ave bar strip; more modest architecture than North Slope.",
-        "source": {"clip_from": "Park Slope", "bbox": [-73.992, 40.655, -73.970, 40.668]},
+        "source": {"base": "South Slope"},
     },
 
     {
@@ -341,7 +341,7 @@ BROOKLYN = [
             "The commute to Midtown (~42 min via F/G) is the primary trade-off."
         ),
         "watch_outs": "Longer Midtown commute (42 min); modest architectural character; very limited furnished supply.",
-        "source": {"clip_from": "Park Slope", "bbox": [-73.988, 40.646, -73.970, 40.658]},
+        "source": {"base": "Windsor Terrace"},
     },
 
     {
@@ -367,7 +367,7 @@ BROOKLYN = [
             "Composite 4.36 with no dimension below 4.0 satisfies T2; just misses T1 on composite."
         ),
         "watch_outs": "Longest Brooklyn commute in the analysis (45 min to Midtown); very limited furnished supply; may require car for some errands.",
-        "source": {"base": "Flatbush"},
+        "source": {"clip_from": "Flatbush", "bbox": [-73.972, 40.626, -73.950, 40.648]},
     },
 
     # ──── Tier 4 ─────────────────────────────────────────────────────────────
@@ -527,7 +527,7 @@ LIC_QUEENS = [
             "Neighborhood still maturing; some blocks feel underdeveloped. "
             "7 train is crowded during peak hours."
         ),
-        "source": {"base": "Hunters Point"},
+        "source": {"base": "Long Island City", "remainder_of": True},
     },
 
     {
@@ -580,7 +580,7 @@ LIC_QUEENS = [
             "Ranked T2 rather than T1 primarily because beauty and neighborhood maturity lag LIC core."
         ),
         "watch_outs": "Neighborhood still developing; limited dining/shopping without walking to core LIC; some wind from open waterfront.",
-        "source": {"clip_from": "Hunters Point", "bbox": [-73.962, 40.734, -73.950, 40.743]},
+        "source": {"clip_from": "Long Island City", "bbox": [-73.962, 40.734, -73.950, 40.743]},
     },
 
     {
@@ -674,7 +674,7 @@ LIC_QUEENS = [
             "Ranked T3 for the best-commute seekers who accept less neighborhood warmth."
         ),
         "watch_outs": "Construction activity; industrial-adjacent blocks; commuter-heavy feel rather than neighborhood.",
-        "source": {"clip_from": "Hunters Point", "bbox": [-73.952, 40.743, -73.939, 40.752]},
+        "source": {"clip_from": "Long Island City", "bbox": [-73.952, 40.743, -73.939, 40.752]},
     },
 
     # ──── Tier 4 ─────────────────────────────────────────────────────────────
