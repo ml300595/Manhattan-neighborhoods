@@ -959,11 +959,11 @@ All commute times are door-to-door estimates assuming average walking pace,
 no unusual delays, and off-peak (non-crush hour) conditions. Add 5–10 minutes
 for peak-hour crowding on 4/5/6/7/L lines.
 
-**Limitation 5: Unit-level data absent**
-Part 8 documents the framework for evaluating specific units, but no specific
-units were evaluated in this session because the Google Sheets data source was
-inaccessible. Any AI receiving this document should apply the framework in §7
-to actual listing data when it becomes available.
+**Limitation 5: Unit-level evaluations**
+Part 8 documents the framework for evaluating specific units. Evaluated listings
+are tracked in `docs/unit_tracker.md` (1 entry as of last update). Any AI
+receiving this document should apply the framework in §7 to additional listing
+data and append rows to that tracker file.
 
 ### 9.3 Recommended Viewing Order (Prioritized Shortlist)
 
