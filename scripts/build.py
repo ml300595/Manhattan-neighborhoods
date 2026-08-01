@@ -15,73 +15,17 @@ import math
 import sys
 from pathlib import Path
 
-from shapely.geometry import shape, mapping, box
+from shapely.geometry import mapping
 from shapely.ops import unary_union
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 from atlas_data import TIERS, NEIGHBORHOODS  # noqa: E402
+from geo import build_polygons, load_base  # noqa: E402
 
 BASE_PATH = ROOT / "data" / "manhattan_base.geojson"
 OUT_DIR = ROOT / "output"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
-
-
-def load_base():
-    raw = json.loads(BASE_PATH.read_text())
-    return {f["properties"]["name"]: shape(f["geometry"]) for f in raw["features"]}
-
-
-def build_polygons(base):
-    """Return list of (entry, polygon) for each report neighborhood.
-
-    Two-pass:
-      1. Resolve all `clip_from` rectangles and `merge` operations.
-      2. For `remainder_of` entries, subtract every clip taken from that parent.
-    """
-    # parent name -> list of clip polygons taken from it
-    clips_by_parent: dict[str, list] = {}
-
-    # First pass: compute geometry for clip / merge / direct base entries
-    resolved = []
-    for entry in NEIGHBORHOODS:
-        src = entry["source"]
-        if "clip_from" in src:
-            parent = base[src["clip_from"]]
-            rect = box(*src["bbox"])
-            geom = parent.intersection(rect)
-            # Optional: punch holes so this clip doesn't overlap prior clips
-            if "subtract" in src:
-                geom = geom.difference(unary_union([box(*b) for b in src["subtract"]]))
-            clips_by_parent.setdefault(src["clip_from"], []).append(rect)
-            if "and_clip_from" in src:
-                parent2 = base[src["and_clip_from"]]
-                rect2 = box(*src["bbox2"])
-                geom = unary_union([geom, parent2.intersection(rect2)])
-                clips_by_parent.setdefault(src["and_clip_from"], []).append(rect2)
-            resolved.append((entry, geom))
-        elif "merge" in src:
-            geom = unary_union([base[n] for n in src["merge"]])
-            resolved.append((entry, geom))
-        elif src.get("remainder_of"):
-            resolved.append((entry, None))  # filled in pass 2
-        else:
-            resolved.append((entry, base[src["base"]]))
-
-    # Second pass: remainders
-    out = []
-    for entry, geom in resolved:
-        src = entry["source"]
-        if src.get("remainder_of"):
-            parent = base[src["base"]]
-            cuts = clips_by_parent.get(src["base"], [])
-            if cuts:
-                parent = parent.difference(unary_union(cuts))
-            geom = parent
-        if geom.is_empty:
-            print(f"WARN: empty geometry for {entry['name']}", file=sys.stderr)
-        out.append((entry, geom))
-    return out
 
 
 def write_geojson(rows, path):
@@ -377,8 +321,8 @@ def render_html(fc, path):
 
 
 def main():
-    base = load_base()
-    rows = build_polygons(base)
+    base = load_base(BASE_PATH)
+    rows = build_polygons(base, NEIGHBORHOODS)
     fc = write_geojson(rows, OUT_DIR / "manhattan_atlas.geojson")
     render_static(rows, OUT_DIR / "manhattan_atlas.svg", OUT_DIR / "manhattan_atlas.png")
     render_html(fc, OUT_DIR / "manhattan_atlas.html")
